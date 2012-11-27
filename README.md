@@ -1,16 +1,19 @@
 # Description
 
-It's a [chef](http://wiki.opscode.com/display/chef/Home) recipe
+Installs zsh and [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 
-Install zsh package and use the [oh-my-zsh
-plugin](https://github.com/robbyrussell/oh-my-zsh) to configure zsh
-
-You can define it by configure like :
+Configure it like this:
 
 ```
-[:oh_my_zsh][:user] = [{
-  :login => 'shingara',
-  :theme => 'rachel',
-  :plugins => ['gem', 'git', 'rails3', 'redis-cli', 'ruby']
-}]
-
+"oh-my-zsh": {
+  "users": {
+    "vaskas": {
+      "theme": "sorin",
+      "plugins": ["git", "ruby", "gem"]
+    },
+    "root": {
+      "theme": "af-magic"
+    }
+  }
+}
+```
