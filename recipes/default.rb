@@ -1,3 +1,5 @@
+include_recipe "git"
+include_recipe "zsh"
 
 node['oh_my_zsh']['users'].each do |user_hash|
   package "zsh"
