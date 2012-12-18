@@ -1,36 +1,37 @@
-include_recipe "git"
-include_recipe "zsh"
+unless node['oh-my-zsh']['users'].empty?
+  include_recipe 'git'
+  include_recipe 'zsh'
+end
 
-package "zsh" unless node['oh-my-zsh']['users'].empty?
-
-node['oh-my-zsh']['users'].each do |username, hash|
-  home = hash['home'] || (username == "root" ? "/root" : "/home/#{username}")
+node['oh-my-zsh']['users'].each do |hash|
+  login = hash['login']
+  home  = hash['home'] || (login == "root" ? "/root" : "/home/#{login}")
 
   git "#{home}/.oh-my-zsh" do
     repository 'git://github.com/robbyrussell/oh-my-zsh.git'
-    user       username
-    reference  "master"
+    user       login
+    reference  'master'
     action     :sync
   end
 
   template "#{home}/.zshrc" do
-    source "zshrc.erb"
-    owner username
-    mode "644"
+    source 'zshrc.erb'
+    owner login
+    mode '644'
     variables({
-      :user           => username,
-      :theme          => hash['theme']          || 'gentoo',
-      :case_sensitive => hash['case_sensitive'] || false,
-      :plugins        => hash['plugins']        || []
+      :user           => login,
+      :theme          => hash['theme']          || node['oh-my-zsh']['theme']
+      :case_sensitive => hash['case_sensitive'] || node['oh-my-zsh']['case_sensitive'],
+      :plugins        => hash['plugins']        || node['oh-my-zsh']['plugins']
     })
   end
 
-  user username do
+  user login do
     action :modify
     shell '/bin/zsh'
   end
 
-  execute "source /etc/profile to all zshrc" do
+  execute 'source /etc/profile to all zshrc' do
     command "echo 'source /etc/profile' >> /etc/zsh/zprofile"
     not_if  "grep 'source /etc/profile' /etc/zsh/zprofile"
   end
