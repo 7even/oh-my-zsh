@@ -20,7 +20,7 @@ node['oh-my-zsh']['users'].each do |hash|
     mode '644'
     variables({
       :user           => login,
-      :theme          => hash['theme']          || node['oh-my-zsh']['theme']
+      :theme          => hash['theme']          || node['oh-my-zsh']['theme'],
       :case_sensitive => hash['case_sensitive'] || node['oh-my-zsh']['case_sensitive'],
       :plugins        => hash['plugins']        || node['oh-my-zsh']['plugins']
     })
