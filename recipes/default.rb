@@ -33,6 +33,6 @@ node['oh-my-zsh']['users'].each do |hash|
 
   execute 'source /etc/profile to all zshrc' do
     command "echo 'source /etc/profile' >> /etc/zsh/zprofile"
-    not_if  "grep 'source /etc/profile' /etc/zsh/zprofile"
+    not_if  "[[ ! -f /etc/zsh/zprofile ]] || grep 'source /etc/profile' /etc/zsh/zprofile"
   end
 end
