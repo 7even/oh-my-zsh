@@ -37,4 +37,8 @@ plugins=(<%= @plugins.join(' ') %>)
 
 source $ZSH/oh-my-zsh.sh
 
+<% unless @autocorrect %>
+unsetopt correct_all
+<% end %>
+
 # Customize to your needs...

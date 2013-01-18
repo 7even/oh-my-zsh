@@ -30,6 +30,7 @@ This cookbook depends on opscode [zsh](https://github.com/opscode-cookbooks/zsh)
 * `node['oh-my-zsh']['theme']` - theme to use for all users unless overridden. Default value is `alanpeabody`.
 * `node['oh-my-zsh']['plugins']` - plugins to use for all users unless overridden. Default value is `["git", "ruby", "gem"]`.
 * `node['oh-my-zsh']['case_sensitive']` - whether zsh autocompletion should be case-sensitive. Default value is `false`.
+* `node['oh-my-zsh']['autocorrect']` - whether command correction should be enabled. Default value is `true`.
 
 # Usage
 
