@@ -22,7 +22,8 @@ node['oh-my-zsh']['users'].each do |hash|
       :user           => login,
       :theme          => hash['theme']          || node['oh-my-zsh']['theme'],
       :case_sensitive => hash['case_sensitive'] || node['oh-my-zsh']['case_sensitive'],
-      :plugins        => hash['plugins']        || node['oh-my-zsh']['plugins']
+      :plugins        => hash['plugins']        || node['oh-my-zsh']['plugins'],
+      :autocorrect    => node['oh-my-zsh']['autocorrect']
     })
   end
 
