@@ -12,6 +12,7 @@ node['oh-my-zsh']['users'].each do |hash|
     user       login
     reference  'master'
     action     :sync
+    depth      1
   end
 
   template "#{home}/.zshrc" do
