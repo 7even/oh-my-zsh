@@ -5,7 +5,7 @@ end
 
 node[:oh_my_zsh][:users].each do |hash|
   login = hash[:login]
-  home  = hash[:home] || `cat /etc/passwd | grep "#{hash[:login]}" | cut -d ":" -f6`.chop
+  home  = hash[:home] || (username == 'root' ? '/root' : "/home/#{username}")
   
   git "#{home}/.oh-my-zsh" do
     repository 'git://github.com/robbyrussell/oh-my-zsh.git'
